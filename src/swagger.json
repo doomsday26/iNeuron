@@ -1,0 +1,233 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "User Employee model",
+      "license": {
+        "name": "MIT",
+        "url":"http://localhost:3000"
+      }
+    },
+    "host": "localhost:3000",
+"basePath":"",
+    "tags":[
+      {"name":"users","description":"API FOR User In System"}
+    ],
+    "schemes": [
+      "http"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+"servers":[
+    {"url":"http://localhost:3000/"}
+],
+
+    "paths": 
+    {
+      
+      "/home": {
+        "get": {
+          "summary": "fetche all the user",
+          "description": "The user endpoint returns information about the Users ",
+          
+          "responses": {
+            "200": {
+              "description": "An array of users in data",
+              "schema": {
+                "message": {"type":"string"},
+                "data": {
+                  "$ref": "#/definitions/User"
+                }
+              }
+            },
+            "default": {
+              "description": "Unexpected error",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        }
+      }
+    ,
+      "/oneUser/{id}": {
+        "get": {
+          "tags":["users"],
+          "summary": "Info for a specific user",
+          "operationId": "showUserById",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "The id of the user to retrieve",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Expected response to a valid request"
+  
+            },
+            "default": {
+              "description": "unexpected error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "/delete/{id}": {
+        "delete": {
+          "tags":["users"],
+          "summary": "deletes a specific user",
+          "operationId": "deleteUserById",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "The id of the user to delete",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Expected response to a valid request"
+  
+            },
+            "default": {
+              "description": "unexpected error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "/create": {
+        "post": {
+          "tags":["users"],
+          "summary": "creates new user",
+          "operationId": "create",
+          "parameters": [
+            {
+              "name": "body",
+              "in": "body",
+              "required": true,
+              "description": "The data of the user to be added",
+              "schema": {
+                "$ref":"#/definitions/User"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Expected response to a valid request"
+  
+            },
+            "default": {
+              "description": "unexpected error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "/update": {
+        "put": {
+          "tags":["users"],
+          "summary": "find by name and updates department of a specific user as department changes not names.",
+          "operationId": "updatebyById",
+          "parameters": [
+            {
+              "name": "body",
+              "in": "body",
+              "required": true,
+              "description": "The id of the user to delete",
+              "schema": {
+                "$ref":"#/definitions/User"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Expected response to a valid request"
+  
+            },
+            "default": {
+              "description": "unexpected error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+
+    }
+    ,
+    "definitions": {
+      
+      "User": {
+        "required": [
+          "name",
+          "dept"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "dept": {
+            "type": "string"
+          }
+        }
+      },
+    
+      "Error": {
+        "required": [
+          "code",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
