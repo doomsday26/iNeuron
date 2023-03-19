@@ -14,7 +14,7 @@ app.use(Router)
 
 app.use('/swagger',swaggerui.serve),
 app.use('/swagger',swaggerui.setup(swaggerDocument))
-mongoose.connect('mongodb+srv://harsh:harsh123@cluster0.n0uj1lw.mongodb.net/?retryWrites=true&w=majority').then(()=>{
+mongoose.connect('****************************************').then(()=>{
    
     console.log("connected to database ")
 }).catch(err=>{
